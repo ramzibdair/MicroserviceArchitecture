@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option csharp_namespace = "Discount.Gprc";
+
+package discount.Gprc.Protos;
+
+// The Discount service definition.
+service DiscountProtoService {
+ 
+  rpc GetDiscount (CouponRequet) returns (DiscountModal);
+}
+
+// The request message containing the user's name.
+message CouponRequet {
+  string ProductId = 1;
+  string Value = 2;
+}
+
+// The response message containing the greetings.
+message DiscountModal {
+  int32 id = 1;
+	string productName = 2;
+	string description = 3;
+	int32 amount = 4;
+}
