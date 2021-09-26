@@ -2,6 +2,7 @@ using Basket.API.ClientGprcServices;
 using Basket.Domain.Reposities;
 using Basket.Redis;
 using Discount.Gprc;
+using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -42,6 +43,15 @@ namespace Basket.API
             services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(opt => 
             opt.Address = new Uri(Configuration.GetValue<string>("DiscountGprcServerSetting:Address")));
             // General Configuration
+
+            // MassTransit-RabbitMQ Configuration
+            services.AddMassTransit(config => {
+                config.UsingRabbitMq((ctx, cfg) => {
+                    cfg.Host(Configuration["EventBusSettings:HostAddress"]);
+                });
+            });
+            services.AddMassTransitHostedService();
+
             services.AddScoped<IBasketRepository, BasketRepository>();
             services.AddScoped<DiscountServiceClient>();
         }

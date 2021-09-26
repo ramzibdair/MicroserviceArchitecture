@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -9,11 +9,15 @@
 
   <ItemGroup>
     <PackageReference Include="Grpc.AspNetCore" Version="2.32.0" />
+    <PackageReference Include="MassTransit" Version="7.2.2" />
+    <PackageReference Include="MassTransit.AspNetCore" Version="7.2.2" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="7.2.2" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.11.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\BuildingBlock\ClassLibrary1\EventBus.Messages.csproj" />
     <ProjectReference Include="..\Basket.Domain\Basket.Domain.csproj" />
     <ProjectReference Include="..\Basket.Redis\Basket.Redis.csproj" />
   </ItemGroup>
