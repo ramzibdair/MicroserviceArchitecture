@@ -3,9 +3,8 @@ using EventBus.Messages.Events;
 using MassTransit;
 using MassTransit.Mediator;
 using Microsoft.Extensions.Logging;
+using Order.Application.Features.CreateOrder;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Order.API.EventBusConsumer
@@ -23,9 +22,11 @@ namespace Order.API.EventBusConsumer
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public Task Consume(ConsumeContext<BasketCheckoutEvent> context)
+        public async Task Consume(ConsumeContext<BasketCheckoutEvent> context)
         {
-            throw new NotImplementedException();
+            var commend = new CreateOrderCommand() { TotalPrice = context.Message.TotalPrice, UserName = context.Message.UserName };
+            await _mediator.Send(commend);
+            _logger.LogInformation("BasketCheckout event has been consumed successfully.");
         }
     }
 }

@@ -39,7 +39,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Order.Infrastructure", "Ser
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlock", "BuildingBlock", "{4F6F1683-2A38-411A-94E4-704985E15235}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.Messages", "BuildingBlock\ClassLibrary1\EventBus.Messages.csproj", "{17BA85D0-20F3-41B4-883F-804597D122AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.Messages", "BuildingBlock\EventBus.Messages\EventBus.Messages.csproj", "{17BA85D0-20F3-41B4-883F-804597D122AF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "APIGateway", "APIGateway", "{94A6C9F7-C7AC-4098-B293-05340598137E}"
 EndProject

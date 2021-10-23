@@ -29,11 +29,18 @@ services:
     ports:
       - "8001:80"
 
+  rabitmq:
+    container_name: rabiitmq
+    restart: always
+    ports:
+      - 5672:5672
+
   rediscache:
     container_name: rediscache
     restart: always
     ports:
       - 6379:6379
+      - 15672:15672
 
   portainer:
     container_name: portainer

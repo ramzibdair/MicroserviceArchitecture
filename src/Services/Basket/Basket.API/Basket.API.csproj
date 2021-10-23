@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\BuildingBlock\ClassLibrary1\EventBus.Messages.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlock\EventBus.Messages\EventBus.Messages.csproj" />
     <ProjectReference Include="..\Basket.Domain\Basket.Domain.csproj" />
     <ProjectReference Include="..\Basket.Redis\Basket.Redis.csproj" />
   </ItemGroup>
