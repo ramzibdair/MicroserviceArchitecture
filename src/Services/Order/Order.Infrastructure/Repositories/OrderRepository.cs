@@ -9,10 +9,10 @@ namespace Order.Infrastructure.Repositories
 {
     public class OrderRepository : BaseRepository<Domain.Entities.Order>, IOrderRepository
     {
-        private readonly  OrderContext _dbContext;
+        private readonly OrderContext _dbContext;
         public OrderRepository(OrderContext orderContext) : base(orderContext)
         {
-
+            _dbContext = orderContext ?? throw new System.ArgumentNullException();
         }
         public async Task<IEnumerable<Domain.Entities.Order>> GetOrdersByUserName(string userName)
         {

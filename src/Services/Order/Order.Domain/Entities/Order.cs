@@ -9,6 +9,38 @@ namespace Order.Domain.Entities
 {
     public class Order : EntityBase
     {
+        private Order() { }
+        public Order(string userName,
+                     decimal totalPrice,
+                     string firstName,
+                     string lastName,
+                     string emailAddress,
+                     string addressLine,
+                     string country,
+                     string state,
+                     string zipCode,
+                     string cardName,
+                     string cardNumber,
+                     string expiration,
+                     string cVV,
+                     int paymentMethod)
+        {
+            UserName = userName;
+            TotalPrice = totalPrice;
+            FirstName = firstName;
+            LastName = lastName;
+            EmailAddress = emailAddress;
+            AddressLine = addressLine;
+            Country = country;
+            State = state;
+            ZipCode = zipCode;
+            CardName = cardName;
+            CardNumber = CardNumber;
+            Expiration = expiration;
+            CVV = cVV;
+            PaymentMethod = paymentMethod;
+
+        }
         public string UserName { get; private set; }
         public decimal TotalPrice { get; private set; }
 

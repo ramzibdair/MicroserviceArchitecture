@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <Folder Include="Features\DeleteOrder\" />
-    <Folder Include="Features\RetrieveOrder\" />
     <Folder Include="Features\UpdateOrder\" />
   </ItemGroup>
 

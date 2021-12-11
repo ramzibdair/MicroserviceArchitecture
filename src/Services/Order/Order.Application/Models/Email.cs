@@ -8,5 +8,8 @@ namespace Order.Application.Models
 {
     public class Email
     {
+        public string To { set; get; }
+        public string Body { set; get; }
+        public string Subject { set; get; }
     }
 }
