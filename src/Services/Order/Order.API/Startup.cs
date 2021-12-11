@@ -47,9 +47,10 @@ namespace Order.API
                     });
                 });
             });
+            services.AddMediator();
             services.AddMassTransitHostedService();
-            services.AddScoped<BasketCheckoutConsumer>(); 
-
+            services.AddScoped<BasketCheckoutConsumer>();
+            
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

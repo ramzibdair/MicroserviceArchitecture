@@ -50,5 +50,15 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data
+  
+  orderdb:
+    container_name: orderdb
+    environment:
+      - SA_PASSWORD=Pass@word
+      - ACCEPT_EULA=Y
+    ports:
+      - "5433:1433"
+    volumes:
+      - orderdb_data:/var/opt/mssql 
  
       
