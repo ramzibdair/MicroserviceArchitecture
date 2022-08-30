@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30907.101
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{BABDB440-2DBC-4C2C-AD45-421D28E2F7DD}"
 EndProject
@@ -47,7 +47,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OcelotApiGateway", "APIGate
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HealthCheck", "HealthCheck", "{3E284B3D-C308-4338-B462-5715018E11D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthCheck", "HealthCheck\WebApplication1\HealthCheck.csproj", "{F7859CB1-315D-4C36-BE1D-3DCBEAC192D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthCheck", "HealthCheck\WebApplication1\HealthCheck.csproj", "{F7859CB1-315D-4C36-BE1D-3DCBEAC192D3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catalog.Application", "Services\Catalog\Catalog.Application\Catalog.Application.csproj", "{A53903F6-8235-4923-8FBB-3EC4F256DA91}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Disount.API", "Services\Disount\Disount.API\Disount.API.csproj", "{2A08AC91-82BA-41B5-8067-5D2302AFA939}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IdentityProvider", "IdentityProvider", "{32644038-8C7F-4E83-94B2-F66ED79AAEE1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityProvider", "IdentityProvider\IdentityProvider\IdentityProvider.csproj", "{1BBA24A7-99B8-4667-B029-E71C5CCBE346}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -115,6 +123,18 @@ Global
 		{F7859CB1-315D-4C36-BE1D-3DCBEAC192D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F7859CB1-315D-4C36-BE1D-3DCBEAC192D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F7859CB1-315D-4C36-BE1D-3DCBEAC192D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A53903F6-8235-4923-8FBB-3EC4F256DA91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A53903F6-8235-4923-8FBB-3EC4F256DA91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A53903F6-8235-4923-8FBB-3EC4F256DA91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A53903F6-8235-4923-8FBB-3EC4F256DA91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A08AC91-82BA-41B5-8067-5D2302AFA939}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A08AC91-82BA-41B5-8067-5D2302AFA939}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A08AC91-82BA-41B5-8067-5D2302AFA939}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A08AC91-82BA-41B5-8067-5D2302AFA939}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BBA24A7-99B8-4667-B029-E71C5CCBE346}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BBA24A7-99B8-4667-B029-E71C5CCBE346}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BBA24A7-99B8-4667-B029-E71C5CCBE346}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BBA24A7-99B8-4667-B029-E71C5CCBE346}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -138,6 +158,9 @@ Global
 		{17BA85D0-20F3-41B4-883F-804597D122AF} = {4F6F1683-2A38-411A-94E4-704985E15235}
 		{153CF4D4-8189-4855-9850-9F85E61CD2D5} = {94A6C9F7-C7AC-4098-B293-05340598137E}
 		{F7859CB1-315D-4C36-BE1D-3DCBEAC192D3} = {3E284B3D-C308-4338-B462-5715018E11D2}
+		{A53903F6-8235-4923-8FBB-3EC4F256DA91} = {28B8D7CB-F248-4389-8FC6-9F41CF8C9BB8}
+		{2A08AC91-82BA-41B5-8067-5D2302AFA939} = {92488BDC-53B0-4A30-AF8E-21AB76D3387F}
+		{1BBA24A7-99B8-4667-B029-E71C5CCBE346} = {32644038-8C7F-4E83-94B2-F66ED79AAEE1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B51B3FF6-80CF-4BE5-B4A2-40E440FA7DCE}

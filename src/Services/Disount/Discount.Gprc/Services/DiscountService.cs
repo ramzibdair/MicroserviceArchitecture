@@ -1,5 +1,7 @@
+using Discount.Gprc.Repositories;
 using Grpc.Core;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Threading.Tasks;
 
 
@@ -8,21 +10,29 @@ namespace Discount.Gprc
     public class DiscountService : DiscountProtoService.DiscountProtoServiceBase
     {
         private readonly ILogger<DiscountService> _logger;
-        public DiscountService(ILogger<DiscountService> logger)
+        private readonly IDiscountRepository _discountRepository;
+        public DiscountService(ILogger<DiscountService> logger , IDiscountRepository discountRepository)
         {
-            _logger = logger;
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _discountRepository = discountRepository ?? throw new ArgumentNullException(nameof(discountRepository));
         }
 
-        public override Task<DiscountModal> GetDiscount(CouponRequet request, ServerCallContext context)
+        public override async Task<DiscountModal> GetDiscount(CouponRequet request, ServerCallContext context)
         {
-            return Task.FromResult(new DiscountModal
+            _logger.LogInformation($"Get Discount ");
+            var discount = await _discountRepository.GetDiscountByIDAsync(request.ProductId);
+            if(discount != null)
             {
-                Amount = 100,
-                Description = "Yearly disount",
-                Id = 1,
-                ProductName = "Item 1"
+                return new DiscountModal
+                {
+                    Amount = discount.Amount,
+                    Description = discount.Description,
+                    Id = discount.ID,
+                    ProductName = discount.ProductName
 
-            });
+                };
+            }
+            return null;
         }
     }
 }

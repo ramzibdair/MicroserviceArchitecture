@@ -36,6 +36,16 @@ namespace Catalog.API
             });
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ICatalogContext, CatalogContext>();
+
+            services.AddApiVersioning(opt =>
+            {
+                // Will provide the different api version which is available for the client
+                opt.ReportApiVersions = true;
+                // this configuration will allow the api to automaticaly take api_version=1.0 in case it was not specify
+                opt.AssumeDefaultVersionWhenUnspecified = true;
+                // We are giving the default version of 1.0 to the api
+                opt.DefaultApiVersion = ApiVersion.Default; // new ApiVersion(1, 0);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

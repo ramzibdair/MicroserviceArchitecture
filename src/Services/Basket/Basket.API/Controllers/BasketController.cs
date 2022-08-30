@@ -36,12 +36,22 @@ namespace Basket.API.Controllers
         }
 
         [HttpPost]
+        
         [ProducesResponseType(typeof(ShoppingCart), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<ShoppingCart>> UpdateBasetAsync(ShoppingCart shoppingCart)
         {
-            var result = await _discountServiceClient.CheckDisountAsync(new Discount.Gprc.CouponRequet() { ProductId = "qqs2w2", Value = "XVB" });
+           // var result = await _discountServiceClient.CheckDisountAsync(new Discount.Gprc.CouponRequet() { ProductId = "1", Value = "XVB" });
             
-           return Ok( await _basketRepository.UpdateBasket(shoppingCart));
+           //return Ok( await _basketRepository.UpdateBasket(shoppingCart));
+
+            // Communicate with Discount.Grpc and calculate lastest prices of products into sc
+            foreach (var item in shoppingCart.Items)
+            {
+                var coupon = await _discountServiceClient.CheckDisountAsync(new Discount.Gprc.CouponRequet() {ProductId = item.ProductName, Value = item.Price.ToString() });
+                item.Price -= coupon.Amount;
+            }
+
+            return Ok(await _basketRepository.UpdateBasket(shoppingCart));
         }
         [HttpDelete]
         [ProducesResponseType(typeof(void), (int)HttpStatusCode.OK)]
@@ -52,6 +62,7 @@ namespace Basket.API.Controllers
         }
 
         [HttpPost]
+        [Route("Checkout")]
         [ProducesResponseType(typeof(void), (int)HttpStatusCode.Accepted)]
         public async Task<IActionResult> CheckoutBasketAsync(string username)
         {

@@ -9,6 +9,29 @@ services:
     volumes:
       - mongo_data:/data/db
 
+  discountdb:
+    container_name: discountdb
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=DiscountDB
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  pgadmin:
+    container_name: pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=ramzi@bdair.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    restart: always
+    ports:
+      - "5050:80" 
+    volumes:
+      - pgadmin_data:/root/.pgadmin
+
   catalog.api:
     container_name: catalog.api
     environment:
@@ -24,10 +47,32 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - "Redis:ConnectionString:rediscache:6379"
+      - "DiscountGprcServerSetting:Address:http://discount.gprc"
     depends_on:
       - rediscache
     ports:
       - "8001:80"
+
+  discount.api:
+    container_name: discount.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "Database:ConnectionString:Server=discountdb;Port=5432;Database=admin;User Id =admin;Password=admin"
+    depends_on:
+      - discountdb
+    ports:
+      - "8002:80"
+
+  discount.gprc:
+    container_name: discount.gprc
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "Database:ConnectionString:Server=localhost;Port=5432;Database=admin;User Id =admin;Password=admin"
+    depends_on:
+      - discountdb
+    ports:
+      - "8003:80"
+
 
   rabitmq:
     container_name: rabiitmq
@@ -62,3 +107,5 @@ services:
       - orderdb_data:/var/opt/mssql 
  
       
+
+

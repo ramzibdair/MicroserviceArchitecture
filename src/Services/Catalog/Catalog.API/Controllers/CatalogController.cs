@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Catalog.API.Controllers
 {
     [ApiController]
-    [Route("api/v1/[Controller]")]
+    [Route("api/{version:apiVersion}/[Controller]")]
     public class CatalogController : ControllerBase
     {
         private readonly IProductRepository _productRepository;
@@ -23,9 +23,18 @@ namespace Catalog.API.Controllers
 
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Product>), (int)HttpStatusCode.OK)]
+        [ApiVersion("1.0")]
         public async Task<ActionResult<IEnumerable<Product>>> GetAllProducts()
         {
             return Ok( await _productRepository.GetAllProducts());
+        }
+
+        [HttpGet]
+        [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
+        [ApiVersion("1.0")]
+        public async Task<ActionResult<IEnumerable<Product>>> GetProducts(string Id)
+        {
+            return Ok(await _productRepository.GetProductsById(Id));
         }
 
     }
