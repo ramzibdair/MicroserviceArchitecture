@@ -5,10 +5,10 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Order.Application.Contracts.Repositories
+namespace Order.Domain.Abstraction
 {
-    public interface IAsyncRepository<T>  where T : EntityBase 
-    {
+    public interface IAsyncRepository<T>  where T : EntityBase , IAggregateRoot
+	{
 		Task<IReadOnlyList<T>> GetAllAsync();
 		Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> predicate);
 		Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> predicate = null,

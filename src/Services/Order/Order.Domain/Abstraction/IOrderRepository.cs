@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Order.Application.Contracts.Repositories
+namespace Order.Domain.Abstraction
 {
     public interface IOrderRepository : IAsyncRepository<Domain.Entities.Order>
     {

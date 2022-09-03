@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Order.Application.Contracts.Repositories;
 using Order.Infrastructure.EntityFramework;
+using Order.Domain.Abstraction;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;

@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.DependencyInjection;
+//using Microsoft.Extensions.Logging;
+//using Microsoft.Extensions.DependencyInjection;
 using Order.Infrastructure.EntityFramework;
 using Order.API.Extentions;
-using Order.Infrastructure.EntityFramework.Seed;
+//using Order.Infrastructure.EntityFramework.Seed;
 
 namespace Order.API
 {
@@ -15,9 +15,9 @@ namespace Order.API
             CreateHostBuilder(args).Build()
                   .MigrateDatabase<OrderContext>((context, services) =>
                   {
-                      var logger = services.GetService<ILogger<OderSeed>>();
-                      OderSeed.SeedAsync(context, logger)
-                          .Wait();
+                      //var logger = services.GetService<ILogger<OderSeed>>();
+                      //OderSeed.SeedAsync(context, logger)
+                      //    .Wait();
                   }).Run();
         }
 

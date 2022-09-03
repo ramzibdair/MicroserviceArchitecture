@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Contracts\Repositories\" />
     <Folder Include="Features\DeleteOrder\" />
     <Folder Include="Features\UpdateOrder\" />
   </ItemGroup>

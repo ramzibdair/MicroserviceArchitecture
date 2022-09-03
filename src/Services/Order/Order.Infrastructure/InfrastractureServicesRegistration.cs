@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Order.Application.Contracts.Infra;
-using Order.Application.Contracts.Repositories;
+using Order.Domain.Abstraction;
 using Order.Application.Models;
 using Order.Infrastructure.EntityFramework;
 using Order.Infrastructure.Infra;

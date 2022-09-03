@@ -67,10 +67,30 @@ namespace Basket.API.Controllers
         public async Task<IActionResult> CheckoutBasketAsync(string username)
         {
             var basket = await _basketRepository.GetBasket(username);
-            BasketCheckoutEvent checkoutEvent = new BasketCheckoutEvent() { TotalPrice = basket.TotalPrice, UserName = username };
-             await _publishEndpoint.Publish(checkoutEvent);
-            await _basketRepository.DeleteBasket(username);
-            return Accepted();
+            if(basket != null && basket.Items.Count > 0)
+            {
+                BasketCheckoutEvent checkoutEvent = new BasketCheckoutEvent() { TotalPrice = basket.TotalPrice, UserName = username };
+                foreach(var item in basket.Items)
+                {
+                    checkoutEvent.Items.Add(new ProductItem() 
+                    { 
+                        Color = item.Color ,
+                        ProductId = item.ProductId ,
+                        Price = item.Price ,
+                        ProductName = item.ProductName ,
+                        Quantity= item.Quantity 
+                    });
+                }
+                await _publishEndpoint.Publish(checkoutEvent);
+                await _basketRepository.DeleteBasket(username);
+                return Accepted();
+            }
+            else
+            {
+                return BadRequest();
+            }
+
+            
         }
     }
 }

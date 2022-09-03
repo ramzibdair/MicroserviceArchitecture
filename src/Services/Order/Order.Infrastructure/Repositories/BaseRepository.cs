@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Order.Application.Contracts.Repositories;
 using Order.Domain.Abstraction;
 using Order.Infrastructure.EntityFramework;
 using System;
@@ -10,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Order.Infrastructure.Repositories
 {
-    public class BaseRepository<T> : IAsyncRepository<T> where T : EntityBase
+    public class BaseRepository<T> : IAsyncRepository<T> where T : EntityBase, IAggregateRoot
     {
         private readonly OrderContext _dbContext;
         public BaseRepository(OrderContext dbContext)

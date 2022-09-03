@@ -1,4 +1,5 @@
 ﻿using Order.Domain.Abstraction;
+using Order.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,57 +8,46 @@ using System.Threading.Tasks;
 
 namespace Order.Domain.Entities
 {
-    public class Order : EntityBase
+    public class Order : EntityBase, IAggregateRoot
     {
         private Order() { }
-        public Order(string userName,
-                     decimal totalPrice,
-                     string firstName,
-                     string lastName,
-                     string emailAddress,
-                     string addressLine,
-                     string country,
-                     string state,
-                     string zipCode,
-                     string cardName,
-                     string cardNumber,
-                     string expiration,
-                     string cVV,
-                     int paymentMethod)
+        public Order(List<Product> products,BillingAddress billingAddress,Payment payment,string userName)
         {
             UserName = userName;
-            TotalPrice = totalPrice;
-            FirstName = firstName;
-            LastName = lastName;
-            EmailAddress = emailAddress;
-            AddressLine = addressLine;
-            Country = country;
-            State = state;
-            ZipCode = zipCode;
-            CardName = cardName;
-            CardNumber = CardNumber;
-            Expiration = expiration;
-            CVV = cVV;
-            PaymentMethod = paymentMethod;
-
+            Products = new List<Product>();
+            AddProducts(products);
+            BillingAddress = new BillingAddress(
+                                                billingAddress.FirstName, billingAddress.LastName, 
+                                                billingAddress.EmailAddress,billingAddress.AddressLine,
+                                                billingAddress.Country, billingAddress.State, 
+                                                billingAddress.ZipCode);
+            Payment = new Payment(payment.CardName, payment.CardNumber, payment.Expiration, payment.CVV, payment.PaymentMethod);
         }
-        public string UserName { get; private set; }
-        public decimal TotalPrice { get; private set; }
+        public string UserName { get; }
+        public decimal TotalPrice {
+            get 
+            {
+                return Products.Count() > 0 ? this.Products.Sum(p => p.TotalPrice) : 0;
+            }
+        }
+        public IList<Product> Products { get; }
+        public BillingAddress BillingAddress { get; }
+        public Payment Payment { get;  }
 
-        // BillingAddress
-        public string FirstName { get; private set; }
-        public string LastName { get; private set; }
-        public string EmailAddress { get; private set; }
-        public string AddressLine { get; private set; }
-        public string Country { get; private set; }
-        public string State { get; private set; }
-        public string ZipCode { get; private set; }
-
-        // Payment
-        public string CardName { get; private set; }
-        public string CardNumber { get; private set; }
-        public string Expiration { get; private set; }
-        public string CVV { get; private set; }
-        public int PaymentMethod { get; private set; }
+        private void AddProducts(List<Product> products)
+        {
+            foreach(var product in products)
+            {
+                Products.Add(new Product() 
+                {
+                    Count = product.Count,
+                    Id = product.Id,
+                    Name = product.Name,
+                    ImageFile = product.ImageFile,
+                    Price = product.Price,
+                    Summary = product.Summary
+                });
+            }
+        }
     }
 }

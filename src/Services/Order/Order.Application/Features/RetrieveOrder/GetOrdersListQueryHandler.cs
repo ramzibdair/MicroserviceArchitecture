@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
-using Order.Application.Contracts.Repositories;
+using Order.Domain.Abstraction;
 using System;
 using System.Collections.Generic;
 using System.Linq;

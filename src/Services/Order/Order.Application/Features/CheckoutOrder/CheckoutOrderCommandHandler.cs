@@ -2,14 +2,11 @@
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Order.Application.Contracts.Infra;
-using Order.Application.Contracts.Repositories;
 using Order.Application.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using Order.Domain.Entities;
 using System.Threading;
 using System.Threading.Tasks;
+using Order.Domain.Abstraction;
 
 namespace Order.Application.Features.CheckoutOrder
 {

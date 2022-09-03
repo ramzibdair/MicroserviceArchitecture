@@ -11,6 +11,8 @@ namespace Order.Infrastructure.EntityFramework
    
             builder.ToTable("Order", "dbo");
             builder.HasKey(r => r.Id);
+            builder.OwnsOne(r => r.BillingAddress);
+            builder.OwnsOne(r => r.Payment);
         }
     }
 }
