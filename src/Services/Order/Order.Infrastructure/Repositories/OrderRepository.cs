@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Order.Infrastructure.EntityFramework;
 using Order.Domain.Abstraction;
+using Order.Infrastructure.EntityFramework;
+using Order.Infrastructure.Specifications;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Order.Infrastructure.Repositories
@@ -16,10 +16,18 @@ namespace Order.Infrastructure.Repositories
         }
         public async Task<IEnumerable<Domain.Entities.Order>> GetOrdersByUserName(string userName)
         {
-            var orderList = await _dbContext.Orders
-                                    .Where(o => o.UserName == userName)
-                                    .ToListAsync();
+            //var orderList = await _dbContext.Orders
+            //                        .Where(o => o.UserName == userName)
+            //                        .ToListAsync();
+            var orderList = await ApplySpecification(new GetOrdersByUsernameSpecificaion(userName)).ToListAsync();
             return orderList;
         }
+
+        public async Task<Domain.Entities.Order> GetOrderByIdAsync(int id)
+        {
+            return await ApplySpecification(new GetOrderByIdSpecification(id)).FirstOrDefaultAsync();
+        }
+
+        
     }
 }

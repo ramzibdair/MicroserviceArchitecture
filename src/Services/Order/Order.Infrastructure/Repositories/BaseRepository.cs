@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Order.Domain.Abstraction;
 using Order.Infrastructure.EntityFramework;
+using Order.Infrastructure.Specifications;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -82,6 +83,11 @@ namespace Order.Infrastructure.Repositories
         {
             _dbContext.Entry(entity).State = EntityState.Modified;
             await _dbContext.SaveChangesAsync();
+        }
+
+        protected IQueryable<T> ApplySpecification(Specification<T> specification)
+        {
+            return SpeceficationEvaluator.GetQuery(_dbContext.Set<T>(), specification);
         }
     }
 }
