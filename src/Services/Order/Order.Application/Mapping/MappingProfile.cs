@@ -14,8 +14,8 @@ namespace Order.Application.Mapping
     {
         public MappingProfile()
         {
-            CreateMap<Order.Domain.Entities.Order, OrdersVm>().ReverseMap();
-            CreateMap<Order.Domain.Entities.Order, CheckoutOrderCommand>().ReverseMap();
+            CreateMap<Domain.Entities.Order, OrdersVM>().ReverseMap();
+            CreateMap<Domain.Entities.Order, CheckoutOrderCommand>().ReverseMap();
         }
     }
 }

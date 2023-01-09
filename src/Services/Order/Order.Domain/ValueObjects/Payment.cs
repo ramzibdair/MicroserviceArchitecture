@@ -9,9 +9,13 @@ namespace Order.Domain.ValueObjects
 {
     public class Payment: ValueObject
     {
-        public Payment() { }
 
-        public Payment(string cardName, string cardNumber, string expiration, string cVV, int paymentMethod)
+        public static Payment Create(string cardName, string cardNumber, string expiration, string cVV, int paymentMethod)
+        {
+            //TODO : write your constrain 
+            return new Payment( cardName,  cardNumber,  expiration,  cVV,  paymentMethod);
+        }
+        private Payment(string cardName, string cardNumber, string expiration, string cVV, int paymentMethod)
         {
             CardName = cardName;
             CardNumber = cardNumber;
@@ -27,7 +31,7 @@ namespace Order.Domain.ValueObjects
         public int PaymentMethod { get; private set; }
 
 
-        protected override IEnumerable<object> GetEqualityComponents()
+        protected override IEnumerable<object> GetAtomicValue()
         {
             yield return CardName;
             yield return CardNumber;

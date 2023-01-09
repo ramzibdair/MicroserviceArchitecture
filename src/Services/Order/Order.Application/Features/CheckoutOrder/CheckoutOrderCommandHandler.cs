@@ -6,7 +6,7 @@ using Order.Application.Models;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Order.Domain.Abstraction;
+using Order.Domain.Repositories;
 
 namespace Order.Application.Features.CheckoutOrder
 {

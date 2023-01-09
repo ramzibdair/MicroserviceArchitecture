@@ -8,7 +8,7 @@ namespace Order.Infrastructure.Specifications
 {
     public abstract class Specification<TEntity> where TEntity : EntityBase
     {
-        protected Specification(Predicate<TEntity> criteria) => Criteria = criteria;
+        protected Specification(Expression<Func<TEntity,bool>> criteria) => Criteria = criteria;
 
         public Expression<Func<TEntity,bool>>? Criteria { get;  }
 

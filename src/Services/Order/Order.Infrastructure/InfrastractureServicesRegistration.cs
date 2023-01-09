@@ -7,11 +7,11 @@ using Order.Application.Models;
 using Order.Infrastructure.EntityFramework;
 using Order.Infrastructure.Infra;
 using Order.Infrastructure.Repositories;
-
+using Order.Domain.Repositories;
 
 namespace Order.Infrastructure
 {
-   public static class InfrastractureServicesRegistration
+    public static class InfrastractureServicesRegistration
     {
         public static IServiceCollection AddInfrastractureServices(this IServiceCollection services, IConfiguration configuration)
         {

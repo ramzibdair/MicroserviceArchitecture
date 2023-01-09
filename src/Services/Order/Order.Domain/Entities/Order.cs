@@ -8,20 +8,22 @@ using System.Threading.Tasks;
 
 namespace Order.Domain.Entities
 {
-    public class Order : EntityBase, IAggregateRoot
+    public class Order : AggregateRoot
     {
-        private Order() { }
-        public Order(List<Product> products,BillingAddress billingAddress,Payment payment,string userName)
+        //private Order() { }
+        private Order(List<Product> products,BillingAddress billingAddress,Payment payment,string userName)
         {
             UserName = userName;
             Products = new List<Product>();
             AddProducts(products);
-            BillingAddress = new BillingAddress(
-                                                billingAddress.FirstName, billingAddress.LastName, 
-                                                billingAddress.EmailAddress,billingAddress.AddressLine,
-                                                billingAddress.Country, billingAddress.State, 
-                                                billingAddress.ZipCode);
-            Payment = new Payment(payment.CardName, payment.CardNumber, payment.Expiration, payment.CVV, payment.PaymentMethod);
+            BillingAddress = billingAddress;
+            //BillingAddress =  BillingAddress.Create(
+            //                                    billingAddress.FirstName, billingAddress.LastName, 
+            //                                    billingAddress.EmailAddress,billingAddress.AddressLine,
+            //                                    billingAddress.Country, billingAddress.State, 
+            //                                    billingAddress.ZipCode);
+            //Payment = Payment.Create(payment.CardName, payment.CardNumber, payment.Expiration, payment.CVV, payment.PaymentMethod);
+            Payment = payment;
         }
         public string UserName { get; }
         public decimal TotalPrice {
@@ -34,6 +36,13 @@ namespace Order.Domain.Entities
         public BillingAddress BillingAddress { get; }
         public Payment Payment { get;  }
 
+        public static Order Create(List<Product> products, BillingAddress billingAddress, Payment payment, string userName)
+        {
+          var order = new Order(products, billingAddress, payment, userName);
+            //rease event
+          return order;
+        }
+
         private void AddProducts(List<Product> products)
         {
             foreach(var product in products)
@@ -41,7 +50,6 @@ namespace Order.Domain.Entities
                 Products.Add(new Product() 
                 {
                     Count = product.Count,
-                    Id = product.Id,
                     Name = product.Name,
                     ImageFile = product.ImageFile,
                     Price = product.Price,

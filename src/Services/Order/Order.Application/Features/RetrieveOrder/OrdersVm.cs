@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Order.Application.Features.RetrieveOrder
 {
-    public class OrdersVm
+    public  class OrdersVM
     {
         public string UserName { get; private set; }
         public decimal TotalPrice { get; private set; }

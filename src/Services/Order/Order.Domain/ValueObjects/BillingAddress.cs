@@ -1,21 +1,27 @@
 ﻿using Order.Domain.Abstraction;
 using System.Collections.Generic;
+using System.Reflection.Metadata;
+using System.Runtime.InteropServices;
 
 namespace Order.Domain.ValueObjects
 {
     public class BillingAddress : ValueObject
     {
-        public string FirstName { get; private set; }
-        public string LastName { get; private set; }
-        public string EmailAddress { get; private set; }
-        public string AddressLine { get; private set; }
-        public string Country { get; private set; }
-        public string State { get; private set; }
-        public string ZipCode { get; private set; }
+        public string FirstName { get;  }
+        public string LastName { get;  }
+        public string EmailAddress { get;  }
+        public string AddressLine { get;}
+        public string Country { get; }
+        public string State { get; }
+        public string ZipCode { get; }
 
-        public BillingAddress() { }
+        public static BillingAddress Create(string firstName, string lastName, string emailAddress, string addressLine, string country, string state, string zipCode)
+        {
+            //TODO : write your constrain 
+            return new BillingAddress(firstName, lastName, emailAddress, addressLine, country, state, zipCode);
+        }
 
-        public BillingAddress(string firstName, string lastName, string emailAddress, string addressLine, string country, string state, string zipCode)
+        private BillingAddress(string firstName, string lastName, string emailAddress, string addressLine, string country, string state, string zipCode)
         {
             FirstName = firstName;
             LastName = lastName;
@@ -26,7 +32,7 @@ namespace Order.Domain.ValueObjects
             ZipCode = zipCode;
         }
 
-        protected override IEnumerable<object> GetEqualityComponents()
+        protected override IEnumerable<object> GetAtomicValue()
         {
             yield return FirstName;
             yield return LastName;

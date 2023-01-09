@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Order.Application.Features.RetrieveOrder
 {
-    public class GetOrdersListQuery : IRequest<List<OrdersVm>>
+    public class GetOrdersListQuery : IRequest<List<OrdersVM>>
     {
         public string UserName { get; set; }
 

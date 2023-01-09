@@ -19,6 +19,7 @@ namespace Order.Infrastructure.Specifications
                 qeryable = qeryable.Where(specification.Criteria);
             }
 
+
             qeryable = specification.IncludeExpressions.Aggregate(qeryable,
                 (current, includeExpression) =>
                     current.Include(includeExpression));

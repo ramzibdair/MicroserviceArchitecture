@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Order.Domain.Abstraction;
+using Order.Domain.Repositories;
 using Order.Infrastructure.EntityFramework;
 using Order.Infrastructure.Specifications;
 using System.Collections.Generic;
@@ -23,11 +23,5 @@ namespace Order.Infrastructure.Repositories
             return orderList;
         }
 
-        public async Task<Domain.Entities.Order> GetOrderByIdAsync(int id)
-        {
-            return await ApplySpecification(new GetOrderByIdSpecification(id)).FirstOrDefaultAsync();
-        }
-
-        
     }
 }

@@ -4,41 +4,44 @@ using System.Linq;
 
 namespace Order.Domain.Abstraction
 {
-    public abstract class ValueObject
+    public abstract class ValueObject : IEquatable<ValueObject>
     {
-        protected static bool EqualOperator(ValueObject left, ValueObject right)
+        //protected static bool EqualOperator(ValueObject left, ValueObject right)
+        //{
+        //    if (ReferenceEquals(left, null) ^ ReferenceEquals(right, null))
+        //    {
+        //        return false;
+        //    }
+        //    return ReferenceEquals(left, null) || left.Equals(right);
+        //}
+
+        private bool ValuesAreEqual(ValueObject other)
         {
-            if (ReferenceEquals(left, null) ^ ReferenceEquals(right, null))
-            {
-                return false;
-            }
-            return ReferenceEquals(left, null) || left.Equals(right);
+            return GetAtomicValue().SequenceEqual(other.GetAtomicValue());
         }
 
-        protected static bool NotEqualOperator(ValueObject left, ValueObject right)
-        {
-            return !(EqualOperator(left, right));
-        }
+        //protected static bool NotEqualOperator(ValueObject left, ValueObject right)
+        //{
+        //    return !(EqualOperator(left, right));
+        //}
 
-        protected abstract IEnumerable<object> GetEqualityComponents();
+        protected abstract IEnumerable<object> GetAtomicValue();
 
         public override bool Equals(object obj)
         {
-            if (obj == null || obj.GetType() != GetType())
-            {
-                return false;
-            }
-
-            var other = (ValueObject)obj;
-
-            return this.GetEqualityComponents().SequenceEqual(other.GetEqualityComponents());
+            return obj is ValueObject other && ValuesAreEqual(other);
+           
         }
 
         public override int GetHashCode()
         {
-            return GetEqualityComponents()
-                .Select(x => x != null ? x.GetHashCode() : 0)
-                .Aggregate((x, y) => x ^ y);
+            return GetAtomicValue()
+                .Aggregate(default(int),HashCode.Combine);
+        }
+
+        public bool Equals(ValueObject other)
+        {
+            return other is not null && ValuesAreEqual(other);
         }
         // Other utility methods
     }
