@@ -1,4 +1,4 @@
-version: '3.4'
+version: '3.8'
 
 services:
   catalogdb:
@@ -105,7 +105,11 @@ services:
       - "5433:1433"
     volumes:
       - orderdb_data:/var/opt/mssql 
- 
-      
 
-
+  shortenurl:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - 8004:80
+    depends_on:
+      - orderdb

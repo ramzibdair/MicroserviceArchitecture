@@ -13,7 +13,7 @@ namespace EventBus.Messages.Events
     public class ProductItem
     {
         public int Quantity { get; set; }
-        public string Color { get; set; }
+        public Dictionary<string, string> Metadata { get; set; } = new Dictionary<string, string>();
         public decimal Price { get; set; }
         public string ProductId { get; set; }
         public string ProductName { get; set; }

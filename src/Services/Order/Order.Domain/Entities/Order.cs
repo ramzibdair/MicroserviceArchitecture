@@ -1,10 +1,12 @@
 ﻿using Order.Domain.Abstraction;
+using Order.Domain.DomainEvents;
 using Order.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Order.Domain.Errors.DomainErrors;
 
 namespace Order.Domain.Entities
 {
@@ -39,8 +41,14 @@ namespace Order.Domain.Entities
         public static Order Create(List<Product> products, BillingAddress billingAddress, Payment payment, string userName)
         {
           var order = new Order(products, billingAddress, payment, userName);
-            //rease event
-          return order;
+            RaiseEvent(new OrderCreatedDomainEvent(order.UserName, order.Id)); 
+            return order;
+        }
+        public Order Checkout() 
+        {
+            //IOderRepository.Insert(this)
+            RaiseEvent(new OrderCreatedDomainEvent(UserName, Id)); //TODO move to domain manager
+            return this;
         }
 
         private void AddProducts(List<Product> products)

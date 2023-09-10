@@ -2,19 +2,13 @@ using EventBus.Messages.Shared;
 using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Order.API.EventBusConsumer;
 using Order.Application;
 using Order.Infrastructure;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Order.API
 {
@@ -56,6 +50,7 @@ namespace Order.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Order.API", Version = "v1" });
             });
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -76,6 +71,7 @@ namespace Order.API
             {
                 endpoints.MapControllers();
             });
+            
         }
     }
 }

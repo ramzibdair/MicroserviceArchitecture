@@ -3,7 +3,6 @@
 
 namespace Order.Domain.DomainEvents
 {
-    public sealed record OrderCreatedDomainEvent : IDomianEvent
-    {
-    }
+    public sealed record OrderCreatedDomainEvent(string UserName , int OrderId) : IDomianEvent;
+    
 }

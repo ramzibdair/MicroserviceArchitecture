@@ -5,15 +5,13 @@ using EventBus.Messages.Events;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
 namespace Basket.API.Controllers
 {
     [ApiController]
-    [Route("api/v1/[controller]")]
+    [Route("api/{version:apiVersion}/[controller]")]
     public class BasketController : ControllerBase
     {
         private readonly IBasketRepository _basketRepository;
@@ -48,7 +46,7 @@ namespace Basket.API.Controllers
             foreach (var item in shoppingCart.Items)
             {
                 var coupon = await _discountServiceClient.CheckDisountAsync(new Discount.Gprc.CouponRequet() {ProductId = item.ProductName, Value = item.Price.ToString() });
-                item.Price -= coupon.Amount;
+                item.SetPrice(item.OriginalPrice, coupon.Amount);
             }
 
             return Ok(await _basketRepository.UpdateBasket(shoppingCart));
@@ -73,8 +71,8 @@ namespace Basket.API.Controllers
                 foreach(var item in basket.Items)
                 {
                     checkoutEvent.Items.Add(new ProductItem() 
-                    { 
-                        Color = item.Color ,
+                    {
+                        Metadata = item.Metadata ,
                         ProductId = item.ProductId ,
                         Price = item.Price ,
                         ProductName = item.ProductName ,

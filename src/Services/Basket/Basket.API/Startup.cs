@@ -9,12 +9,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace Basket.API
 {
@@ -34,6 +31,15 @@ namespace Basket.API
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Basket.API", Version = "v1" });
+            });
+            services.AddApiVersioning(opt =>
+            {
+                // Will provide the different api version which is available for the client
+                opt.ReportApiVersions = true;
+                // this configuration will allow the api to automaticaly take api_version=1.0 in case it was not specify
+                opt.AssumeDefaultVersionWhenUnspecified = true;
+                // We are giving the default version of 1.0 to the api
+                opt.DefaultApiVersion = ApiVersion.Default; // new ApiVersion(1, 0);
             });
             services.AddStackExchangeRedisCache(options =>
             {

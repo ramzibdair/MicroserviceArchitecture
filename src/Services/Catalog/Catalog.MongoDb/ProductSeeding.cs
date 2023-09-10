@@ -1,5 +1,4 @@
 ﻿
-
 using Catalog.Domain.Entities;
 using MongoDB.Driver;
 using System.Collections.Generic;
@@ -29,7 +28,13 @@ namespace Catalog.MongoDb
                     Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.",
                     ImageFile = "product-1.png",
                     Price = 950.00M,
-                    Category = "Smart Phone"
+                    Category = "Smart Phone",
+                    Metadata = new Dictionary<string, string>()
+                    {
+                            { "Color", "Red"},
+                            { "RAM", "256G"}
+
+                    }
                 },
                 new Product()
                 {
@@ -39,7 +44,13 @@ namespace Catalog.MongoDb
                     Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.",
                     ImageFile = "product-2.png",
                     Price = 840.00M,
-                    Category = "Smart Phone"
+                    Category = "Smart Phone",
+                    Metadata = new Dictionary<string, string>()
+                    {
+                            { "Color", "Green"},
+                            { "RAM", "512G"}
+
+                    }
                 },
                 new Product()
                 {
@@ -69,7 +80,13 @@ namespace Catalog.MongoDb
                     Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.",
                     ImageFile = "product-5.png",
                     Price = 380.00M,
-                    Category = "Smart Phone"
+                    Category = "Smart Phone",
+                    Metadata = new Dictionary<string, string>()
+                    {
+                            { "Color", "Red"},
+                            { "RAM", "256G"}
+
+                    }
                 },
                 new Product()
                 {

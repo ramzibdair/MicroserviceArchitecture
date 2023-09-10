@@ -14,6 +14,7 @@ namespace Order.Infrastructure.EntityFramework
           
         }
         public DbSet<Domain.Entities.Order> Orders { get; set; }
+        public DbSet<Domain.Entities.OutboxMessage> OutboxMessage { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -40,10 +41,10 @@ namespace Order.Infrastructure.EntityFramework
                 switch (entry.State)
                 {
                     case EntityState.Added:
-                        entry.Entity.AddCreationValue(DateTime.Now, "RAMZI");
+                        entry.Entity.AddCreationValue(DateTime.UtcNow, "RAMZI");
                         break;
                     case EntityState.Modified:
-                        entry.Entity.AddModificationValue(DateTime.Now, "RAMZI");
+                        entry.Entity.AddModificationValue(DateTime.UtcNow, "RAMZI");
                         break;
                 }
             }

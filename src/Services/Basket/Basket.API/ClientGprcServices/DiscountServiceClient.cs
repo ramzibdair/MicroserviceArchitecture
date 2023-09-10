@@ -16,8 +16,8 @@ namespace Basket.API.ClientGprcServices
 
        public async Task<DiscountModal> CheckDisountAsync(CouponRequet couponRequet)
         {
-
-           return await _discountProtoServiceClient.GetDiscountAsync(couponRequet);
+            var x = await _discountProtoServiceClient.GetDiscountAsync(couponRequet);
+            return x;
         }
     }
 }

@@ -28,27 +28,14 @@ namespace Order.Application.Features.CheckoutOrder
         public async Task<int> Handle(CheckoutOrderCommand request, CancellationToken cancellationToken)
         {
             var orderEntity = _mapper.Map<Domain.Entities.Order>(request);
+           // var orderEntity = Domain.Entities.Order.Create();
             var newOrder = await _orderRepository.AddAsync(orderEntity);
 
             _logger.LogInformation($"Order {newOrder.Id} is successfully created.");
 
-            await SendMail(newOrder);
-
             return newOrder.Id;
         }
 
-        private async Task SendMail(Domain.Entities.Order order)
-        {
-            var email = new Email() { To = "ezozkme@gmail.com", Body = $"Order was created.", Subject = "Order was created" };
-
-            try
-            {
-                await _emailService.Send(email);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Order {order.Id} failed due to an error with the mail service: {ex.Message}");
-            }
-        }
+        
     }
 }

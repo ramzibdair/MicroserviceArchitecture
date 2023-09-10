@@ -1,4 +1,4 @@
-version: '3.4'
+version: '3.8'
 
 services:
   catalogdb:
@@ -47,9 +47,16 @@ services:
       context: .
       dockerfile: Services/Disount/Discount.Gprc/Dockerfile
 
+  shortenurl:
+    image: ${DOCKER_REGISTRY-}shortenurl
+    build:
+      context: .
+      dockerfile: Services/ShortenURL/ShortenUrl/Dockerfile
+
 volumes:
   mongo_data:
   portainer_data:
   orderdb_data:
   postgres_data:
   pgadmin_data:
+
